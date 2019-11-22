@@ -56,11 +56,10 @@ def draw_rect(surf, colour, rect, width):
     topright=rect[2],rect[1]    #top right corner of rectangle point
     bottomleft=rect[0],rect[3]#bottom left corner of rectangle point
     bottomright=rect[2],rect[3]#bottom right corner of rectangle point
-    horiz = rect.inflate(shapesWidth-3 , 20) #positioning and centering the line
+    horiz = rect.inflate(shapesWidth-1 , -1) #positioning and centering the line
     draw.line(surf, colour, horiz.topleft, horiz.topright, width) #drawing a line from top left to to topright
     draw.line(surf, colour, horiz.bottomleft, horiz.bottomright, width) #line from bot left to bot right
-
-    vert = rect.inflate(-2, -shapesWidth+10 ) #positioning and centering the line
+    vert = rect.inflate(0, -shapesWidth ) #positioning and centering the line
     draw.line(surf, colour, vert.topleft, vert.bottomleft, width) #line from top left to bot left
     draw.line(surf, colour, vert.topright, vert.bottomright, width) #line from top right to bot right
 
@@ -125,39 +124,39 @@ musicList=["Greatest Battle Music Of All Times_ On The Battlefield.mp3","Ars.mp3
 mixer.music.load(musicList[mp])
 mixer.music.play()
 ############starting animation or gif
-# gifs=[]
-# myClock = time.Clock()
-# for t in range(10):
-#    gifs.append(image.load("00"+str(t)+".png"))
-# while gifnum<37:
-#    gifs.append(image.load("0"+str(gifnum)+".png"))
-#    gifnum+=1
-# for gif in gifs:
-#    screen.fill(0)
-#    screen.blit(gif, (0,0))
-#    display.flip()
-#    myClock.tick(10)
-# time.wait(1000)
-
-# k=10
-# pics = []
-
-# for i in range(10):
-#    pics.append(image.load("yura\\frame_0"+str(i)+"_delay-0.12s.png"))
-# while k<16:
-#    pics.append(image.load("yura\\frame_"+str(k)+"_delay-0.12s.png"))
-#    k+=1
-# for pic in pics:
-#    screen.fill(0)
-#    screen.blit(pic, (0,0))
-#    display.flip()
-#    myClock.tick(10)
-# time.wait(1000)
-# screen.fill(BLACK)
-# display.flip()
-# #background and entrance to paint
-# screen.blit(transform.scale(background2, (1200,800)),(0,0))
-# display.flip()       
+##gifs=[]
+##myClock = time.Clock()
+##for t in range(10):
+##    gifs.append(image.load("00"+str(t)+".png"))
+##while gifnum<37:
+##    gifs.append(image.load("0"+str(gifnum)+".png"))
+##    gifnum+=1
+##for gif in gifs:
+##    screen.fill(0)
+##    screen.blit(gif, (0,0))
+##    display.flip()
+##    myClock.tick(10)
+##time.wait(1000)
+##
+##k=10
+##pics = []
+##
+##for i in range(10):
+##    pics.append(image.load("yura\\frame_0"+str(i)+"_delay-0.12s.png"))
+##while k<16:
+##    pics.append(image.load("yura\\frame_"+str(k)+"_delay-0.12s.png"))
+##    k+=1
+##for pic in pics:
+##    screen.fill(0)
+##    screen.blit(pic, (0,0))
+##    display.flip()
+##    myClock.tick(10)
+##time.wait(1000)
+##screen.fill(BLACK)
+##display.flip()
+ #background and entrance to paint
+screen.blit(transform.scale(background2, (1200,800)),(0,0))
+display.flip()       
 ##############################defining all RECTS
 sticker1Rect=Rect(200,10,110,60)
 sticker2Rect=Rect(320,10,110,60)
@@ -454,6 +453,17 @@ while running:
                         except:
                             print("doesn't exist")
 
+                        if sticker1Rect.collidepoint(mx,my):
+                                tool="sticker1"
+                        elif sticker2Rect.collidepoint(mx,my):
+                                tool="sticker2"
+                        elif sticker3Rect.collidepoint(mx,my):
+                                tool="sticker3"
+                        elif sticker4Rect.collidepoint(mx,my):
+                                tool="sticker4"
+                        elif sticker5Rect.collidepoint(mx,my):
+                                tool="sticker5"
+                elif stickerPage==1:
                         if sticker1Rect.collidepoint(mx,my):
                                 tool="sticker1"
                         elif sticker2Rect.collidepoint(mx,my):
@@ -765,7 +775,7 @@ while running:
                 draw.rect(screen,RED,sticker5Rect,7)
                 text=str("Press up to get a bigger sticker and down for a smaller one")
                 info=myFont.render(text,True,(0,0,200))
-                screen.blit(info,(150,610))
+                screen.blit(info,(240,610))
         elif tool=="filled rectangle":
                 draw.rect(screen,RED,pencilRect,2)
                 text=str("Allows itsuser to draw a filled rectangle.")
